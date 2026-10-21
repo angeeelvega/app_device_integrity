@@ -50,11 +50,14 @@ class AppDeviceIntegrityPlugin: FlutterPlugin, MethodCallHandler, ActivityAware 
   }
 
   override fun onDetachedFromActivity() {
-    TODO("Not yet implemented")
+    // Play Integrity uses the application context captured in onAttachedToEngine.
+    // Kotlin's TODO() throws NotImplementedError, so leaving it here crashes the
+    // app when Android destroys the Activity.
   }
 
+  @Suppress("UNUSED_PARAMETER")
   override fun onReattachedToActivityForConfigChanges(binding: ActivityPluginBinding) {
-    TODO("Not yet implemented")
+    // The integrity token request does not use the Activity instance.
   }
 
   override fun onAttachedToActivity(binding: ActivityPluginBinding) {
@@ -62,6 +65,6 @@ class AppDeviceIntegrityPlugin: FlutterPlugin, MethodCallHandler, ActivityAware 
   }
 
   override fun onDetachedFromActivityForConfigChanges() {
-    TODO("Not yet implemented")
+    // Same as onDetachedFromActivity: nothing tied to the Activity needs to be released.
   }
 }
